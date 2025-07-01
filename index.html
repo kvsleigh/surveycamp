@@ -157,17 +157,90 @@
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+    .spell-name {
+  position: relative;
+  display: inline-block;
+}
+
+.spell-name span {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: letterFade 0.6s forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+  color: #444;
+  text-shadow: 0 0 6px #32cd32;
+}
+
+.spell-name span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffffff 30%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  animation: sparkleTrail 0.6s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.1s + 0.1s);
+}
+
+.spell-name span:nth-child(n)  { --i: 0; }
+.spell-name span:nth-child(1)  { --i: 1; }
+.spell-name span:nth-child(2)  { --i: 2; }
+.spell-name span:nth-child(3)  { --i: 3; }
+.spell-name span:nth-child(4)  { --i: 4; }
+.spell-name span:nth-child(5)  { --i: 5; }
+.spell-name span:nth-child(6)  { --i: 6; }
+.spell-name span:nth-child(7)  { --i: 7; }
+.spell-name span:nth-child(8)  { --i: 8; }
+.spell-name span:nth-child(9)  { --i: 9; }
+.spell-name span:nth-child(10) { --i: 10; }
+.spell-name span:nth-child(11) { --i: 11; }
+.spell-name span:nth-child(12) { --i: 12; }
+.spell-name span:nth-child(13) { --i: 13; }
+.spell-name span:nth-child(14) { --i: 14; }
+.spell-name span:nth-child(15) { --i: 15; }
+.spell-name span:nth-child(16) { --i: 16; }
+.spell-name span:nth-child(17) { --i: 17; }
+.spell-name span:nth-child(18) { --i: 18; }
+
+@keyframes sparkleTrail {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -80%) scale(0.1);
+  }
+}
+
+@keyframes letterFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   </style>
 </head>
 <body>
   <audio autoplay loop hidden>
     <source src="music/fantasy.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
 
   <div class="container">
     <div class="title">A Day in My Survey Camp</div>
-    <div class="name">Brandon Shane Tullao</div>
+    <div class="name spell-name">
+  <span>B</span><span>r</span><span>a</span><span>n</span><span>d</span><span>o</span><span>n</span>
+  <span> </span>
+  <span>S</span><span>h</span><span>a</span><span>n</span><span>e</span>
+  <span> </span>
+  <span>T</span><span>u</span><span>l</span><span>l</span><span>a</span><span>o</span>
+</div>
     <button class="start-button" onclick="showDays()">Start the Journey</button>
 
     <div class="days" id="daysContainer">
