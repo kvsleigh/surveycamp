@@ -231,7 +231,38 @@
   text-shadow: 0 0 10px #32cd32, 0 0 20px #ff69b4;
 }
 
-    .photo-title {
+    .spell-day span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: dayLetterFade 0.5s forwards;
+  animation-delay: calc(var(--i) * 0.07s);
+  color: inherit;
+  text-shadow: 0 0 4px #ff69b4;
+  position: relative;
+}
+
+.spell-day span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, #fff 30%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  animation: sparkleTrail 0.5s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.07s + 0.1s);
+}
+
+.spell-day:hover span {
+  color: #ff1493;
+  text-shadow: 0 0 10px #32cd32, 0 0 20px #ff69b4;
+}
+
+.photo-title {
   font-size: 1.8rem;
   font-family: 'Playfair Display', serif;
   margin-bottom: 1rem;
@@ -247,6 +278,13 @@
   animation-delay: calc(var(--i) * 0.07s);
   color: #006400;
   text-shadow: 0 0 5px #ff69b4;
+}
+
+@keyframes dayLetterFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
   </style>
 </head>
@@ -270,19 +308,20 @@
 
     <div class="days" id="daysContainer">
       <script>
-        for (let i = 1; i <= 15; i++) {
-          document.write(`<div class='day' onclick='showPhotos(${i})'>Day ${i}</div>`);
-          document.write(`<div class='photos' id='photos${i}'>
-           <h3 class='photo-title'>${'Photos from Day ' + i
-  .toString()
-  .split('')
-  .map((char, idx) => `<span style="--i:${idx + 1}">${char}</span>`)
-  .join('')}</h3>
-            <img src='images/day${i}-1.jpg' alt='Day ${i} Photo 1'>
-            <img src='images/day${i}-2.jpg' alt='Day ${i} Photo 2'>
-            <img src='images/day${i}-3.jpg' alt='Day ${i} Photo 3'>
-          </div>`);
-        }
+       for (let i = 1; i <= 15; i++) {
+  let dayTitle = `Day ${i}`.split('').map((char, idx) => `<span style="--i:${idx + 1}">${char}</span>`).join('');
+  document.write(`<div class='day spell-day' onclick='showPhotos(${i})'>${dayTitle}</div>`);
+  document.write(`<div class='photos' id='photos${i}'>
+    <h3 class='photo-title'>${'Photos from Day ' + i
+      .toString()
+      .split('')
+      .map((char, idx) => `<span style="--i:${idx + 1}">${char}</span>`)
+      .join('')}</h3>
+    <img src='images/day${i}-1.jpg' alt='Day ${i} Photo 1'>
+    <img src='images/day${i}-2.jpg' alt='Day ${i} Photo 2'>
+    <img src='images/day${i}-3.jpg' alt='Day ${i} Photo 3'>
+  </div>`);
+}
       </script>
     </div>
   </div>
