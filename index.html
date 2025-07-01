@@ -325,7 +325,50 @@
     opacity: 1;
     transform: translateY(0);
   }
-  
+  .day::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, #ffb6c1, transparent);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: driftGlow 6s ease-in-out infinite alternate;
+  top: -10px;
+  left: -10px;
+  pointer-events: none;
+}
+
+.day::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #32cd32, transparent);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: driftGlow2 7s ease-in-out infinite alternate;
+  bottom: -10px;
+  right: -10px;
+  pointer-events: none;
+}
+
+@keyframes driftGlow {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-10px) translateX(10px); }
+}
+
+@keyframes driftGlow2 {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(10px) translateX(-10px); }
+}
+    
+    #particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
 }
   </style>
 </head>
