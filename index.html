@@ -225,6 +225,29 @@
     transform: translateY(0);
   }
 }
+
+    .spell-day:hover span {
+  color: #ff1493;
+  text-shadow: 0 0 10px #32cd32, 0 0 20px #ff69b4;
+}
+
+    .photo-title {
+  font-size: 1.8rem;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+.photo-title span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: dayLetterFade 0.5s forwards;
+  animation-delay: calc(var(--i) * 0.07s);
+  color: #006400;
+  text-shadow: 0 0 5px #ff69b4;
+}
   </style>
 </head>
 <body>
@@ -250,7 +273,11 @@
         for (let i = 1; i <= 15; i++) {
           document.write(`<div class='day' onclick='showPhotos(${i})'>Day ${i}</div>`);
           document.write(`<div class='photos' id='photos${i}'>
-            <h3 style='width: 100%; font-family: \"Playfair Display\", serif;'>Photos from Day ${i}</h3>
+           <h3 class='photo-title'>${'Photos from Day ' + i
+  .toString()
+  .split('')
+  .map((char, idx) => `<span style="--i:${idx + 1}">${char}</span>`)
+  .join('')}</h3>
             <img src='images/day${i}-1.jpg' alt='Day ${i} Photo 1'>
             <img src='images/day${i}-2.jpg' alt='Day ${i} Photo 2'>
             <img src='images/day${i}-3.jpg' alt='Day ${i} Photo 3'>
