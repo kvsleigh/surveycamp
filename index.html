@@ -284,6 +284,34 @@
   to {
     opacity: 1;
     transform: translateY(0);
+ }
+  .fade-in {
+  animation: fadeInPhotos 0.6s ease-out forwards;
+}
+
+.fade-out {
+  animation: fadeOutPhotos 0.3s ease-in forwards;
+}
+
+@keyframes fadeInPhotos {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutPhotos {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
   }
 }
   </style>
@@ -332,14 +360,23 @@
       document.getElementById('daysContainer').style.display = 'block';
     }
 
-    function showPhotos(day) {
-      for (let i = 1; i <= 15; i++) {
-        document.getElementById('photos' + i).style.display = 'none';
-      }
-      const selected = document.getElementById('photos' + day);
-      selected.style.display = 'flex';
-      selected.style.animation = 'glowIn 0.5s ease-in-out';
+   function showPhotos(day) {
+  for (let i = 1; i <= 15; i++) {
+    const photos = document.getElementById('photos' + i);
+    if (photos.style.display === 'flex') {
+      photos.classList.remove('fade-in');
+      photos.classList.add('fade-out');
+      setTimeout(() => {
+        photos.style.display = 'none';
+        photos.classList.remove('fade-out');
+      }, 300);
     }
+  }
+
+  const selected = document.getElementById('photos' + day);
+  selected.style.display = 'flex';
+  selected.classList.add('fade-in');
+}
 
     // Create sparkles
     for (let i = 0; i < 50; i++) {
