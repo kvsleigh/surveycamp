@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Day in My Survey Camp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(to bottom right, #ffb6c1, #90ee90);
+      color: #1a1a1a;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .container {
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 7rem;
+      margin-top: 3rem;
+      color: #006400;
+      text-shadow: 6px 6px 25px #ff69b4, -3px -3px 10px #00ffcc;
+      animation: colorCycle 4s infinite alternate, fadeInDrop 2s ease-out, shimmer 3s infinite, floatGlow 4s ease-in-out infinite;
+    }
+    .name {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #444;
+      font-style: italic;
+      animation: fadeInDrop 2.5s ease-out;
+    }
+    .start-button {
+      padding: 1rem 2.5rem;
+      background: linear-gradient(45deg, #ff69b4, #32cd32);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.7rem;
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+      cursor: pointer;
+      animation: pulse 2s infinite, glow 2s ease-in-out infinite;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .start-button:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    }
+    .days {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .day {
+      margin: 1rem auto;
+      max-width: 300px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: transform 0.3s, background 0.3s;
+      font-weight: bold;
+      animation: floatUp 1s ease-in-out, shimmerBox 4s infinite alternate;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .day:hover {
+      transform: scale(1.08) rotate(-1deg);
+      background: #f0fff0;
+      box-shadow: 0 0 20px #ff69b4;
+    }
+    .photos {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+      animation: glowIn 1s ease-in-out;
+    }
+    .photos img {
+      width: 200px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: zoomIn 0.6s ease-out;
+    }
+    .photos img:hover {
+      transform: scale(1.15) rotate(1deg);
+      box-shadow: 0 0 20px #32cd32;
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 10px white;
+      animation: sparkleAnim 4s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sparkleAnim {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-800px) scale(0.5); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDrop {
+      0% { opacity: 0; transform: translateY(-50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glowIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes shimmer {
+      0% { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4; }
+      100% { text-shadow: 0 0 20px #fff, 0 0 30px #00ffcc; }
+    }
+    @keyframes shimmerBox {
+      0% { box-shadow: 0 0 10px #ffc0cb; }
+      100% { box-shadow: 0 0 25px #90ee90; }
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px #fff, 0 0 20px #ff69b4; }
+      50% { box-shadow: 0 0 25px #00ffcc, 0 0 35px #32cd32; }
+    }
+    @keyframes floatGlow {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes colorCycle {
+      0% { color: #006400; text-shadow: 2px 2px #ff69b4; }
+      50% { color: #8a2be2; text-shadow: 2px 2px #00ffcc; }
+      100% { color: #006400; text-shadow: 2px 2px #ff69b4; }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop hidden>
+    <source src="music/fantasy.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <div class="title">A Day in My Survey Camp</div>
+    <div class="name">Brandon Shane Tullao</div>
+    <button class="start-button" onclick="showDays()">Start the Journey</button>
+
+    <div class="days" id="daysContainer">
+      <script>
+        for (let i = 1; i <= 15; i++) {
+          document.write(`<div class='day' onclick='showPhotos(${i})'>Day ${i}</div>`);
+          document.write(`<div class='photos' id='photos${i}'>
+            <h3 style='width: 100%; font-family: \"Playfair Display\", serif;'>Photos from Day ${i}</h3>
+            <img src='images/day${i}-1.jpg' alt='Day ${i} Photo 1'>
+            <img src='images/day${i}-2.jpg' alt='Day ${i} Photo 2'>
+            <img src='images/day${i}-3.jpg' alt='Day ${i} Photo 3'>
+          </div>`);
+        }
+      </script>
+    </div>
+  </div>
+
+  <script>
+    function showDays() {
+      document.querySelector('.start-button').style.display = 'none';
+      document.getElementById('daysContainer').style.display = 'block';
+    }
+
+    function showPhotos(day) {
+      for (let i = 1; i <= 15; i++) {
+        document.getElementById('photos' + i).style.display = 'none';
+      }
+      const selected = document.getElementById('photos' + day);
+      selected.style.display = 'flex';
+      selected.style.animation = 'glowIn 0.5s ease-in-out';
+    }
+
+    // Create sparkles
+    for (let i = 0; i < 50; i++) {
+      let sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      sparkle.style.animationDuration = (Math.random() * 5 + 3) + 's';
+      document.body.appendChild(sparkle);
+    }
+  </script>
+</body>
+</html>
