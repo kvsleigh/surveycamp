@@ -15,6 +15,32 @@
       overflow-x: hidden;
       position: relative;
     }
+    #magical-title span {
+  opacity: 0;
+  display: inline-block;
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+  color: #006400;
+  text-shadow: 2px 2px 10px #ff69b4, -1px -1px 5px #00ffcc;
+  animation: spellReveal 0.5s forwards;
+}
+
+#magical-title span:nth-child(n) {
+  animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes spellReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    filter: blur(0);
+  }
+}
     .curtain-container {
   position: fixed;
   top: 0;
@@ -417,16 +443,12 @@
 </div>
 
   <div class="container">
-    <div class="title">A Day in My Survey Camp</div>
-    <div class="name spell-name">
-  <span>B</span><span>r</span><span>a</span><span>n</span><span>d</span><span>o</span><span>n</span>
-  <span> </span>
-  <span>S</span><span>h</span><span>a</span><span>n</span><span>e</span>
-  <span> </span>
-  <span>T</span><span>u</span><span>l</span><span>l</span><span>a</span><span>o</span>
+   <div class="title" id="magical-title">
+  <span>A</span> <span>D</span><span>a</span><span>y</span> <span>i</span><span>n</span> 
+  <span>M</span><span>y</span> <span>S</span><span>u</span><span>r</span><span>v</span><span>e</span><span>y</span> 
+  <span>C</span><span>a</span><span>m</span><span>p</span>
 </div>
 
-    
     <button class="start-button" onclick="showDays()">Start the Journey</button>
 
     <div class="days" id="daysContainer">
@@ -496,6 +518,12 @@ function showDays() {
   setTimeout(() => {
     document.querySelector('.curtain-container').style.display = 'none';
   }, 2600); // slightly longer than the animation
+</script>
+  <script>
+  const letters = document.querySelectorAll('#magical-title span');
+  letters.forEach((span, i) => {
+    span.style.setProperty('--i', i);
+  });
 </script>
 </body>
 </html>
