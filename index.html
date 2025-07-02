@@ -501,26 +501,22 @@
 
     <button class="start-button" onclick="showDays()">Start the Journey</button>
 
- <!-- Day 1 -->
-  <div class="day" onclick="togglePhotos('photos1')">Day 1</div>
-  <div class="photos" id="photos1">
-    <img src="day1-1.jpg">
-    <img src="day1-2.jpg">
-    <img src="day1-3.jpg">
-    <img src="day1-4.jpg">
-    <img src="day1-5.jpg">
-  </div>
-
-  <!-- Day 2 -->
-  <div class="day" onclick="togglePhotos('photos2')">Day 2</div>
-  <div class="photos" id="photos2">
-    <img src="day2-1.jpg">
-    <img src="day2-2.jpg">
-    <img src="day2-3.jpg">
-    <img src="day2-4.jpg">
-    <img src="day2-5.jpg">
-  </div>
-
+    <div class="days" id="daysContainer">
+      <script>
+       for (let i = 1; i <= 15; i++) {
+  let dayTitle = `Day ${i}`.split('').map((char, idx) => `<span style="--i:${idx + 1}">${char}</span>`).join('');
+  document.write(`<div class='day spell-day' onclick='showPhotos(${i})'>${dayTitle}</div>`);
+  document.write(`<div class='photos' id='photos${i}'>
+    <h3 class='photo-title'>${'Photos from Day ' + i
+      .toString()
+      .split('')
+      .map((char, idx) => `<span style="--i:${idx + 1}">${char}</span>`)
+      .join('')}</h3>
+    <img src=day1-1.jpg>
+    <img src=day1-2.jpg>
+    <img src=day1-3.jpg>
+  </div>`);
+}
       </script>
     </div>
   </div>
